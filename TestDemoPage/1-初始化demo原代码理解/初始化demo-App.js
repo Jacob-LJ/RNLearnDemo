@@ -41,10 +41,11 @@ const instructions = Platform.select({
         'Shake or press menu button for dev menu',
 });
 
-type Props = {};
+type Props = {}; // 这里的type是 flow 的东西，这里启用flow的开关为文件顶部的 @flow
+                 // [js静态类型解析flow用法](https://segmentfault.com/a/1190000016396411#articleHeader70)
 export default class DemoApp extends Component<Props> {  // 这里的<Props>的作用是什么？
     // 注意，这里使用了 export default，一个模块(即一个js文件)只能有一个默认输出，因此export default命令只能使用一次。
-    // 如果使用了export default的话，名称都是可以不用写的，但是规范起见，应该写上
+    // 如果使用了export default的话，名称(DemoApp)都是可以不用写的，但是规范起见，应该写上
 
     // 当一个组件要显示的时候,就会自动调用render,渲染组件
     render() {
@@ -55,6 +56,12 @@ export default class DemoApp extends Component<Props> {  // 这里的<Props>的�
                 <Text style={styles.welcome}>Welcome to React Native!</Text>
                 <Text style={styles.instructions}>To get started, edit App.js</Text>
                 <Text style={styles.instructions}>{instructions}</Text>
+                /*
+                请注意<Text style={styles.instructions}>{instructions}</Text> 中 {styles.instructions} 和 {instructions}
+                的外围有一层括号，
+                我们需要用括号来把pic这个变量嵌入到 JSX 语句中。括号的意思是括号内部为一个 js 变量或表达式，需要执行后取值。因
+                此我们可以把任意合法的 JavaScript 表达式通过括号嵌入到 JSX 语句中。
+                 */
             </View> // 注意，<view>内的多个子<Text>之间没有分号分割
         );
 
