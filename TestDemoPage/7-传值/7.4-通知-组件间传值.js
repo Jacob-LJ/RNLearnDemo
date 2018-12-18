@@ -11,7 +11,27 @@ import {StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
 
 // 传值
 
-// 3 通知，组件间传值
+// 4 通知，组件间传值
+
+/*
+1、导入 import {DeviceEventEmitter} from 'react-native';
+2、在控件装载完成后，初始化监听者
+    componentDidMount() {
+        // 定义 通知监听 属性
+        this.lister = DeviceEventEmitter.addListener('TwoViewSentNotice',(noticeValue)=>{
+            this.setState({
+                noticeValue: this.state.noticeValue + noticeValue,
+            });
+        })
+    }
+
+
+3、在控件移除时，移除监听者
+    componentWillUnmount() {
+        this.lister.remove();
+    }
+*/
+
 
 class ViewOne extends Component {
 

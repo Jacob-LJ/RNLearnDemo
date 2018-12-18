@@ -12,10 +12,13 @@ import {StyleSheet, Text, View} from 'react-native';
 // props
 /*
 1 props(属性) 概念
-大多数组件在创建的时候就可以用各种参数来进行定制。
-用于定制的这些参数就称为props（属性）。
-所谓props，就是属性传递，而且是单向传递的。
-属性多的时候，可以传递一个对象，这是es6中的语法。
+    大多数组件在创建的时候就可以用各种参数来进行定制。
+    用于定制的这些参数就称为props（属性）。
+    所谓props，就是属性传递，而且是单向传递的。
+    属性多的时候，可以传递一个对象，这是es6中的语法。
+
+参考：
+[React Native 入门（五） - Props（属性） - 王小北](https://blog.csdn.net/qq_24867873/article/details/78342908)
 */
 class MyText extends Component {
     render() {
@@ -37,6 +40,7 @@ export default class App extends Component<Props> {
 
                 {/*如果想设置MyText的style只能在其内部return的控件上设置，在这里设置无效*/}
                 <MyText name='Jacob'/>
+                {/* props是在父组件中设置，一旦指定，它的生命周期是不可以改变的 */}
                 <MyText name='Cathy'/>
 
             </View>
