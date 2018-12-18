@@ -39,7 +39,7 @@ export default class App extends Component<Props> {
                 {/*不能再控件后面写注释，报错*/}
                 {/*在控件内部也不能使用 // 这个注释方式*/}
 
-                
+
                 {/*如果想设置MyText的 style 只能在其内部return的控件上设置，在这里设置无效*/}
                 <MyText name='Jacob'/>
                 <MyText name='Cathy'/>

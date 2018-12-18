@@ -42,8 +42,7 @@ const instructions = Platform.select({
 });
 
 type Props = {}; // 这里的type是 flow 的东西，这里启用flow的开关为文件顶部的 @flow
-                 // [js静态类型解析flow用法](https://segmentfault.com/a/1190000016396411#articleHeader70)
-export default class DemoApp extends Component<Props> {  // 这里的<Props>的作用是什么？
+export default class DemoApp extends Component<Props> {  // 这里的<Props>的作用参考底部的Flow Type使用介绍
     // 注意，这里使用了 export default，一个模块(即一个js文件)只能有一个默认输出，因此export default命令只能使用一次。
     // 如果使用了export default的话，名称(DemoApp)都是可以不用写的，但是规范起见，应该写上
 
@@ -88,3 +87,26 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     }, // 从这个地方可以看出，多一个分号是可以的，以前是会报错的
 });
+
+
+/*
+Flow Type使用介绍
+
+1、[js静态类型解析flow用法](https://segmentfault.com/a/1190000016396411#articleHeader70)
+2、[Components | Flow](https://flow.org/en/docs/react/components/) 基本说明了这个type Props = {}; 的使用原因
+3、[Even Better Support for React in Flow](https://medium.com/flow-type/even-better-support-for-react-in-flow-25b0a3485627)
+4、Stack Overflow中也有相关提问，里面的解答就是上述文章中摘抄的 https://stackoverflow.com/a/53425350
+
+综上结论，下属使用情况原因是
+type Props = {};
+export default class DemoApp extends Component<Props> {}
+
+1、支持React的静态类型检测工具Flow升级导致，将以前的隐式推到方式转为显式指明方式
+2、这样的优化目的是让React'摆脱'(目前的理解)prop-type的依赖(上面第2点的文章《component》中有对比说明)，简化写法且使用静态类型检查方式
+这样可以在编译阶段是运行时阶段进行双向类型检查(但是我自己在当前工程中按文章例子测试，并未有明显的类型错误提示，不知道是不是跟IDE有关，目前这里使用的是webstorm)
+
+扩展阅读
+1、[Type Reference | Flow](https://flow.org/en/docs/react/types/)
+2、[Exact type props and spreading passthrough props · Issue #5551 · facebook/flow · GitHub](https://github.com/facebook/flow/issues/5551)
+3、[Validating React Component Props with prop-types – LogRocket](https://blog.logrocket.com/validating-react-component-props-with-prop-types-ef14b29963fc)
+ */
