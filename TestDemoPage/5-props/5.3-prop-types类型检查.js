@@ -58,9 +58,9 @@ export default class App extends Component<Props> {
 
                 {/* 运行时就会弹出一个黄色的警告 提示我们格式错误，age 期望是 number 类型，却得到了 string 类型。 */}
                 <MyText name='Cathy' sex={'women'} age={'error'}/>
-
                 {/* 使用defaultProps内的值 */}
-                <MyText />
+                <MyText/>
+                {/* 在<MyText/>内，使用空格（效果<MyText'空格'/>）即可看到提示属性框 */}
 
 
             </View>
