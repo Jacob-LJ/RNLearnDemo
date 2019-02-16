@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
+// 传递参数给路由器
 // 1. 需要将参数包装成一个对象，作为navigation.navigate方法的第二个参数传递给路由。
 // 如： this.props.navigation.navigate('RouteName', { /* params go here */ })
 //

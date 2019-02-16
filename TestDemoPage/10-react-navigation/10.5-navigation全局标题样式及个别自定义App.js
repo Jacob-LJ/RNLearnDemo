@@ -1,41 +1,17 @@
 import React from 'react';
-import { View, Text, Button, StatusBar, Platform, Image } from 'react-native';
+import { View, Text, Button, StatusBar, Platform } from 'react-native';
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
 
 const isAndroid = Platform.OS === 'android';
 const isiOS = Platform.OS === 'ios';
 
-// 使用自定义组件替换标题
-
-class LogoTitle extends React.Component {
-    render() {
-        // return (
-        //     <Image
-        //         source={require('./TestDemoPage/10-react-navigation/mail.png')}
-        //         style={{ width: 30, height: 30 }}
-        //     />
-        // );
-
-        return (
-            <View style={{flexDirection: 'row', alignItems:'center'}}>
-                <Image
-                    source={require('./TestDemoPage/10-react-navigation/mail.png')}
-                    style={{ width: 30, height: 30 }}
-                />
-                <Text style={{marginLeft:5, fontSize:30, color:'white', fontWeight:'bold'}}>图标题</Text>
-            </View>
-        );
-    }
-}
+// 全局导航样式defaultNavigationOptions, 及个别自定义样式
 
 class HomeScreen extends React.Component {
 
     static navigationOptions = {
         title: 'Home标题',
-        headerTitle: <LogoTitle />, // headerTitle instead of title
-        // headerTitle: '这是标题' // headerTitle默认为一个Text组件，它显示title这个字符串，会覆盖 title 属性
-
     };
 
     render() {
@@ -79,14 +55,75 @@ class DetailsScreen extends React.Component {
                 <Text>otherParam: {JSON.stringify(otherParam)}</Text>
 
                 <Button
+                    title="Go to DetailsScreen"
+                    onPress={() => this.props.navigation.push('Screen1', {
+                        screenTitle: 'Title' + JSON.stringify(+ Math.floor(Math.random() * 100)),
+                    })}
+                />
+                <Button
                     title="Go back"
                     onPress={() => this.props.navigation.goBack()}
+                />
+                <Button
+                    title="Back to Top"
+                    onPress={() => this.props.navigation.popToTop()}
                 />
 
             </View>
         );
     }
 }
+
+
+class Screen1 extends React.Component {
+
+    static navigationOptions = ({ navigation, navigationOptions }) => {
+        const { params } = navigation.state;
+
+        return {
+            title: params ? params.screenTitle : '默认Scree1标题',
+            /* 用于覆盖全局样式 */
+            headerStyle: {
+                backgroundColor: navigationOptions.headerTintColor,
+            },
+            headerTintColor: navigationOptions.headerStyle.backgroundColor,
+        };
+    };
+
+    render() {
+
+        /* 获取导航时传入的 param, 并提供一个默认值 */
+        const { navigation } = this.props;
+        const screenTitle = navigation.getParam('screenTitle', '默认值标题');
+        const otherParam = navigation.getParam('otherParam', 'some default value');
+
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text>Screen1 Screen</Text>
+                <Text>screenTitle: {JSON.stringify(screenTitle)}</Text>
+                <Text>otherParam: {JSON.stringify(otherParam)}</Text>
+
+                <Button
+                    title="Go to DetailsScreen"
+                    onPress={() => this.props.navigation.push('Details', {
+                        screenTitle: JSON.stringify(Math.floor(Math.random() * 100)),
+                    })}
+                />
+                <Button
+                    title="Go back"
+                    onPress={() => this.props.navigation.goBack()}
+                />
+                <Button
+                    title="Back to Top"
+                    onPress={() => this.props.navigation.popToTop()}
+                />
+
+            </View>
+        );
+    }
+}
+
+
 
 
 const AppNavigator = createStackNavigator({
@@ -96,6 +133,7 @@ const AppNavigator = createStackNavigator({
     Details: {
         screen: DetailsScreen,
     },
+    Screen1:Screen1,
 }, {
     initialRouteName: 'Home', // 初始路由
 
