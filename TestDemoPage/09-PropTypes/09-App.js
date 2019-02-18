@@ -10,11 +10,11 @@ import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
 
 // 注意导入文件的路径，可以不带类型后缀(.js)
-import JAView from './TestDemoPage/9-PropTypes/JAView'
+import JAView from './TestDemoPage/09-PropTypes/JAView'
 
 // PropTypes，属性定义在JAView中
 
-export default class App extends Component {
+export default class 0 extends Component {
 
     render() {
         return (
