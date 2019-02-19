@@ -12,7 +12,7 @@ class LogoTitle extends React.Component {
     render() {
         // return (
         //     <Image
-        //         source={require('./TestDemoPage/10-react-navigation/mail.png')}
+        //         source={require('./TestDemoPage/10-react-navigation_3.2.3/mail.png')}
         //         style={{ width: 30, height: 30 }}
         //     />
         // );
@@ -20,7 +20,7 @@ class LogoTitle extends React.Component {
         return (
             <View style={{flexDirection: 'row', alignItems:'center'}}>
                 <Image
-                    source={require('./TestDemoPage/10-react-navigation/mail.png')}
+                    source={require('./TestDemoPage/10-react-navigation_3.2.3/mail.png')}
                     style={{ width: 30, height: 30 }}
                 />
                 <Text style={{marginLeft:5, fontSize:30, color:'white', fontWeight:'bold'}}>图标题</Text>
