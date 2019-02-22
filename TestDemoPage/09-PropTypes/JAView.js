@@ -44,6 +44,17 @@ export default class JAView extends Component {
             <View style={styles.viewStyle} ></View>
         );
     }
+
+/*
+基本可用类型
+  PropTypes.array,
+  PropTypes.bool,
+  PropTypes.func,
+  PropTypes.number,
+  PropTypes.object,
+  PropTypes.string,
+  PropTypes.symbol,
+ */
 }
 
 const styles = StyleSheet.create({
