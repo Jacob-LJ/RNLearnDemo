@@ -33,6 +33,16 @@ export default class NativeBtn extends React.Component {
         normalTitle:PropTypes.string,
         selectedTitle:PropTypes.string,
 
+        // 复杂的原生 NativeBtnManager 的带方法体属性
+        complexProperty:PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            age: PropTypes.number.isRequired,
+            infoDict: PropTypes.shape({
+                wife: PropTypes.string.isRequired,
+                age: PropTypes.number.isRequired,
+            }),
+        }),
+
     }
 
     // 属性的默认值，如果设置了默认值，即使设了isRequired，也不会报警告提示
@@ -52,7 +62,7 @@ export default class NativeBtn extends React.Component {
             <NativeBtnFromeNative
                 {...this.props}
                 style={this.props.style?this.props.style:styles.defaultStyle}
-                onChange={this._onChange} // 将内部方法绑定到原生属性中
+                onBubblingEventBlock={this._onChange} // 将内部方法绑定到原生属性中
             />);
     }
 }

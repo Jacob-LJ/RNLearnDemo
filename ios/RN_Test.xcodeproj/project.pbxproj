@@ -23,6 +23,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1618E20622212035008EB90E /* PropertyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618E20522212035008EB90E /* PropertyModel.m */; };
+		1618E23C222127C7008EB90E /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618E237222127C6008EB90E /* YYClassInfo.m */; };
+		1618E23D222127C7008EB90E /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618E239222127C7008EB90E /* NSObject+YYModel.m */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -348,6 +351,13 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RN_Test/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RN_Test/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1618E20422212035008EB90E /* PropertyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PropertyModel.h; sourceTree = "<group>"; };
+		1618E20522212035008EB90E /* PropertyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PropertyModel.m; sourceTree = "<group>"; };
+		1618E237222127C6008EB90E /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		1618E238222127C6008EB90E /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		1618E239222127C7008EB90E /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		1618E23A222127C7008EB90E /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		1618E23B222127C7008EB90E /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* RN_Test-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RN_Test-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* RN_Test-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RN_Test-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -500,6 +510,7 @@
 		13B07FAE1A68108700A75B9A /* RN_Test */ = {
 			isa = PBXGroup;
 			children = (
+				1618E22E2221259E008EB90E /* ThirdPart */,
 				48054D0B221FD17500E33C05 /* 导出原生UI */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -535,6 +546,35 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1618E22E2221259E008EB90E /* ThirdPart */ = {
+			isa = PBXGroup;
+			children = (
+				1618E22F222125B1008EB90E /* YYModel */,
+			);
+			path = ThirdPart;
+			sourceTree = "<group>";
+		};
+		1618E22F222125B1008EB90E /* YYModel */ = {
+			isa = PBXGroup;
+			children = (
+				1618E238222127C6008EB90E /* NSObject+YYModel.h */,
+				1618E239222127C7008EB90E /* NSObject+YYModel.m */,
+				1618E23B222127C7008EB90E /* YYClassInfo.h */,
+				1618E237222127C6008EB90E /* YYClassInfo.m */,
+				1618E23A222127C7008EB90E /* YYModel.h */,
+			);
+			path = YYModel;
+			sourceTree = "<group>";
+		};
+		1618E236222126C8008EB90E /* model */ = {
+			isa = PBXGroup;
+			children = (
+				1618E20422212035008EB90E /* PropertyModel.h */,
+				1618E20522212035008EB90E /* PropertyModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,6 +586,7 @@
 		48054D0B221FD17500E33C05 /* 导出原生UI */ = {
 			isa = PBXGroup;
 			children = (
+				1618E236222126C8008EB90E /* model */,
 				484939FF221F841200EA299F /* NativeBtn.h */,
 				48493A00221F841200EA299F /* NativeBtn.m */,
 				48493A02221F844F00EA299F /* NativeBtnManager.h */,
@@ -1175,7 +1216,10 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				1618E23D222127C7008EB90E /* NSObject+YYModel.m in Sources */,
 				48493A01221F841200EA299F /* NativeBtn.m in Sources */,
+				1618E20622212035008EB90E /* PropertyModel.m in Sources */,
+				1618E23C222127C7008EB90E /* YYClassInfo.m in Sources */,
 				48493A04221F844F00EA299F /* NativeBtnManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

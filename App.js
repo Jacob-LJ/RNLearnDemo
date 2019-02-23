@@ -14,7 +14,16 @@ import NativeBtn from './TestDemoPage/12-原生UI/NativeBtn'  // NativeBtn.js �
 
 type Props = {};
 export default class DemoApp extends Component<Props> {
+
+
+
     render() {
+
+    const jsonObject = {
+        name : 'jacob',
+        age : 28,
+        infoDict : { wife : 'cathy', age : 27},
+    }
 
         return (
             <View style={styles.container}>
@@ -26,6 +35,8 @@ export default class DemoApp extends Component<Props> {
                     property_array={[1,'jacob',3, true, {'name':'jack', 'age':12}]}
                     normalTitle={'normalTitle'}
                     selectedTitle={'selectedTitle'}
+                    // complexProperty={JSON.stringify(jsonObject)} // 这样传到原生是一个字符串
+                    complexProperty={jsonObject} // 这样传到原生是一个字典对象
                 />
             </View>
         );

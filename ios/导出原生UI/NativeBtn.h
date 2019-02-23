@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <React/RCTViewManager.h>
+#import "PropertyModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<NativeBtnDelegate> delegate;
 
+@property (nonatomic, strong) PropertyModel *complexProperty;
 @property (nonatomic, copy) RCTBubblingEventBlock onBubblingEventBlock;
 
 @end

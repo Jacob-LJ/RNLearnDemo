@@ -34,4 +34,13 @@
   _property_array = property_array;
 }
 
+- (void)setComplexProperty:(PropertyModel *)complexProperty {
+  _complexProperty = complexProperty;
+  
+  NSLog(@"complexProperty - name = %@;\n \
+        complexProperty - age = %ld; \n \
+        complexProperty - infoDict = %@; \n \
+        ",complexProperty.name, complexProperty.age, complexProperty.infoDict);
+}
+
 @end
