@@ -126,5 +126,7 @@ export default () => (
                 console.log('当前页面 ' + currentScreen);
             }
         }}
+        uriPrefix="/app" // 用于深度链接，即 App 间跳转 [Deep linking · React Navigation](https://reactnavigation.org/docs/zh-Hans/deep-linking.html)
+
     />
 );
