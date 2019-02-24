@@ -6,13 +6,21 @@ import { createAppContainer, createStackNavigator, StackActions, NavigationActio
 const isAndroid = Platform.OS === 'android';
 const isiOS = Platform.OS === 'ios';
 
-// 监听导航器的状态
+// modal 方式弹出控制器
 
 class HomeScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: 'HOME', // 下一页的返回按钮显示 < HOME
+            headerLeft: (
+                <Button
+                    // modal 方式弹出
+                    onPress={() => navigation.navigate('MyModal')}
+                    title="modal方式"
+                    color="#fff"
+                />
+            ),
         };
     };
 
@@ -66,33 +74,86 @@ class DetailsScreen extends React.Component {
     }
 }
 
+class ModalScreen extends React.Component {
+    render() {
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+                <Button
+                    onPress={() => this.props.navigation.goBack()}
+                    title="Dismiss"
+                />
 
-const AppNavigator = createStackNavigator({
-    Home: {
-        screen: HomeScreen,
-    },
-    Details: {
-        screen: DetailsScreen,
-    },
-}, {
-    initialRouteName: 'Home', // 初始路由
+                {/*从 modal 出的界面跳转到原先带导航的界面的下一层，会先 dismiss，然后再 push 到 detailScreen，动画不衔接连续*/}
+                <Button
+                    title="Go to Details"
+                    onPress={() => {
+                        this.props.navigation.navigate('Details', {
+                            screenTitle: 'DetailsScreen',
+                            otherParam: 'anything you want here',
+                        });
+                    }}
+                />
+                
+                {/*直接返回 modal 这个的源控制器(Home)，则类似于 dismiss 。push 是没效的 */}
+                <Button
+                    title="Go to Home"
+                    onPress={() => {
+                        this.props.navigation.navigate('Home', {
+                            screenTitle: 'DetailsScreen',
+                            otherParam: 'anything you want here',
+                        });
+                    }}
+                />
+            </View>
+        );
+    }
+}
 
-    // 全局导航样式
-    defaultNavigationOptions: {
-        headerStyle: {
-            backgroundColor: '#f4511e',
+
+
+const AppNavigator = createStackNavigator(
+    {
+        Home: {
+            screen: HomeScreen,
         },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 30,
+        Details: {
+            screen: DetailsScreen,
         },
+    },
+    {
+        initialRouteName: 'Home', // 初始路由
+
+        // 全局导航样式
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+                fontSize: 30,
+            },
     }
 });
 
 
-// 不监听时，直接导出即可
-// export default createAppContainer(AppNavigator);
+
+// 第二个 stack，即另一个 navigator
+const RootStack = createStackNavigator(
+    {
+        Main: {
+            screen: AppNavigator,
+        },
+        MyModal: {
+            screen: ModalScreen,
+        },
+    },
+    {
+        mode: 'modal',
+        headerMode: 'none',
+    }
+);
 
 
 // 通过当前状态获取页面标题
@@ -109,7 +170,7 @@ function getActiveRouteName(navigationState) {
     return route.routeName;
 }
 
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(RootStack);
 
 // 监听导航器的状态
 export default () => (
