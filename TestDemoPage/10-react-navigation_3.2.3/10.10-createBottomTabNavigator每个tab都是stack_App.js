@@ -3,16 +3,13 @@ import {Image, Text, View, Button} from 'react-native';
 import { createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 
 /*
-    简单tabbar设置，createBottomTabNavigator的使用
+    createBottomTabNavigator 的使用
 
     注意点：
-    1、每一个tab中的【标题名称】、【激活态的图片、标题颜色】设置
-    2、代码方式导航到另一个tab
-    3、自定义 tabBarIcon 属性
-    4、bade的设置
+    1、每一个tab对应stack
 
     参考：
-    [react-navigation图文攻略 - 掘金](https://juejin.im/post/5c3d9767e51d45522851f991#heading-4)
+
 */
 
 class HomeScreen extends React.Component {
