@@ -13,6 +13,7 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
     参考：
     [react-navigation图文攻略 - 掘金](https://juejin.im/post/5c3d9767e51d45522851f991#heading-4)
+    里面有对应createBottomTabNavigator、createStackNavigator、createMaterialBottomTabNavigator、createMaterialTopTabNavigator 的使用效果及代码参考
 */
 
 class HomeScreen extends React.Component {
@@ -149,9 +150,9 @@ export default createAppContainer(
                 tabBarIcon: ({ focused, tintColor, horizontal }) =>
                     getTabBarIcon(navigation, focused, tintColor)
                 /*
-                    这里不可以写成这样，即在返回值处添加大括号
+                    // 或者添加大括号后 return 返回
                     tabBarIcon: ({ focused, tintColor, horizontal }) => {
-                        getTabBarIcon(navigation, focused, tintColor)
+                        return getTabBarIcon(navigation, focused, tintColor)
                     }
                  */
             }),

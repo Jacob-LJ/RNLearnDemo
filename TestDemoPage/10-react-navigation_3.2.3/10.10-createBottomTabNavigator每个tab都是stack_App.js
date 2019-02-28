@@ -7,12 +7,23 @@ import { createBottomTabNavigator, createStackNavigator, createAppContainer } fr
 
     注意点：
     1、每一个tab对应stack
+    2、设置页面标题，理解 createStackNavigator、createBottomTabNavigator 的 navigationOptions 设置
+    3、跳转至 ProfileScreen 时隐藏顶部栏
+    4、跳转时，隐藏底部tabbar (跳转过程中 显隐底部栏对前页的内容位置会有上下跳动的影响，自己尝试看效果)
 
     参考：
 
 */
 
 class HomeScreen extends React.Component {
+
+    // 注意： 当前页面是属于 createStackNavigator 的直接下级，所以 navigationOptions 是对应 createStackNavigator 的配置
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'HomeScreen',
+        };
+    };
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -31,6 +42,13 @@ class HomeScreen extends React.Component {
 }
 
 class DetailsScreen extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'DetailsScreen',
+        };
+    };
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -45,6 +63,13 @@ class DetailsScreen extends React.Component {
 }
 
 class SettingsScreen extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'SettingsScreen',
+        };
+    };
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -63,6 +88,14 @@ class SettingsScreen extends React.Component {
 }
 
 class ProfileScreen extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'ProfileScreen',
+            header: null, // 隐藏导航栏
+        };
+    };
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -73,22 +106,50 @@ class ProfileScreen extends React.Component {
 }
 
 
+
+
+
 const HomeStack = createStackNavigator({
     Home: { screen: HomeScreen },
     Details: { screen: DetailsScreen },
 });
+// 配置是否隐藏 tabbar
+HomeStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+    if (navigation.state.index > 0) {
+        tabBarVisible = false;
+    }
+
+    return {
+        tabBarVisible,
+    };
+};
+
+
+
 
 const SettingsStack = createStackNavigator({
     Settings: { screen: SettingsScreen },
     Profile: { screen: ProfileScreen },
 });
+// 配置是否隐藏 tabbar
+SettingsStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+    if (navigation.state.index > 0) {
+        tabBarVisible = false;
+    }
+
+    return {
+        tabBarVisible,
+    };
+};
 
 export default createAppContainer(
     createBottomTabNavigator(
         {
             Home: {
                 screen: HomeStack,
-                // 注意这里的 navigationOptions 设置的位置，还可以在 screen 里面写成 静态的navigationOptions、或 函数形式的写法
+                // 注意： 当前 navigationOptions 是对应 createBottomTabNavigator 的配置，需要搞清楚页面的结构
                 navigationOptions: {
                     // 如果不设置 navigationOptions 中的 title 则默认使用router这个key名作(如Settings)为底部栏名称
                     title: '主页',
