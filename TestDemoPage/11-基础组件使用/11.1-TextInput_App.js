@@ -89,7 +89,7 @@ export default class PizzaTranslator extends Component {
                     }}
 
                     // 还有其他。。，
-            />
+                />
 
                 <Text style={{padding: 10, fontSize: 42}}>
                     {this.state.text}
