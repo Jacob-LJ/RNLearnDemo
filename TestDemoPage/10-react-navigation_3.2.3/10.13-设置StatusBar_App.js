@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, Button, StatusBar, Platform } from 'react-native';
 import { createStackNavigator, createAppContainer, createDrawerNavigator, createBottomTabNavigator } from 'react-navigation';
 
+// 设置 StatusBar，这里是通过监听路由的变化，设置对应页面状态栏的背景色
+
+
 const isAndroid = Platform.OS === 'android';
 
 class Home extends React.Component {

@@ -8,7 +8,7 @@ import { createStackNavigator, createAppContainer, createDrawerNavigator, create
 /*
 2019年03月05日
 
-DeapLink, 应用间跳转demo
+Deep-Linking, 应用间跳转demo
 
 步骤：
 1、在xcode中选择 target - info - URL Types ，添加上 identifier 和 URL scheme
