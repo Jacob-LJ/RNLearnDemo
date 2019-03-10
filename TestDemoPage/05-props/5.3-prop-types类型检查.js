@@ -18,6 +18,9 @@ import PropTypes from 'prop-types';
 2、import PropTypes from 'prop-types';
 3、通过 static propTypes = {} 这种固定格式来设置属性的格式，比如说我们将 age 设置为 number 类型
 4、当实际传入的类型值不符时（或如果有isRequired指定的话，不传时），运行时会有黄色警告提示
+
+参考：
+1、[GitHub - facebook/prop-types: Runtime type checking for React props and similar objects](https://github.com/facebook/prop-types)
 */
 
 class MyText extends Component {
