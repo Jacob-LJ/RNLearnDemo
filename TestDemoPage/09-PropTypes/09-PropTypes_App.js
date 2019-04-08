@@ -14,7 +14,7 @@ import JAView from './TestDemoPage/09-PropTypes/JAView'
 
 // PropTypes，属性定义在JAView中
 
-export default class 0 extends Component {
+export default class App extends Component {
 
     render() {
         return (
