@@ -65,6 +65,7 @@ export default class RefreshListView extends Component {
   
   /// 下拉刷新，设置完刷新状态后再调用刷新方法，使页面上可以显示出加载中的UI，注意这里setState写法
   startHeaderRefreshing() {
+    // 此处的setState使用可以参考06-state文件内对setState的使用介绍
     this.setState(
       {
         isHeaderRefreshing: true
