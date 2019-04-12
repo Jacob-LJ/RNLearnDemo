@@ -6,32 +6,27 @@
  * @flow
  */
 
-import React, { Component } from 'react'
-import { StyleSheet, View, SectionList, Text, Platform, Alert, SafeAreaView, Dimensions, RefreshControl } from 'react-native';
-import FetchUtil from './TestDemoPage/Utils/FetchUtil/FetchUtil.js'
+import React, { Component } from 'react';
+import { AppRegistry, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Animated } from 'react-native';
+import AnimateTextInputField from './TestDemoPage/封装控件/AnimateTextInputField';
 
-type Props = {};
-export default class App extends Component<Props> {
-
+export default class PizzaTranslator extends Component {
     constructor(props) {
         super(props);
-        console.log('constructor');
 
-        FetchUtil.getFetch(this.queryMoviesStr('北京',1,10)).then((response) => {
-            console.log(response);
-        })
     }
 
     render() {
         return (
-            <SafeAreaView>
-                {/*<MovieListScreen/>*/}
-            </SafeAreaView>
-        );
-    }
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
+                >
+                    <AnimateTextInputField
+                        style={{width: 200}}
+                    />
+                </View>
+            </TouchableWithoutFeedback>
 
-    queryMoviesStr(city, start, count) {
-        // return "https://api.douban.com/v2/movie/in_theaters?city=" + city + "&start=" + start + "&count=" + count
-        return "http://mock-api.com/WmnEyknJ.mock/api/v1/rest/count"
+        );
     }
 }

@@ -17,7 +17,26 @@
 {
   
   
-// 项目启动端口占用问题修改参考：[8081端口占用问题](https://www.jianshu.com/p/ef00ec56507c)
+  /*
+   项目启动端口8081占用问题修改参考 https://stackoverflow.com/a/41280629，
+   将 xxx/node_modules/react-native/local-cli/util/Config.js 中的
+   
+   ...
+   server: {
+   port: process.env.RCT_METRO_PORT || 8081,
+   },
+   ...
+   
+   改为
+   ...
+   server: {
+   port: 8089,
+   },
+   ...
+   
+   由于 node_modules 没有上传至git，所以拉取后需要手动修改 Config.js
+   网上很多通过修改 server.js 的文章已经过时了。
+   */
   
   
   NSURL *jsCodeLocation;
