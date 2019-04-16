@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'red',
     },
-    subOne: {
+    subOne: {activeOpacity
         marginTop: 50,
         width: 200,
         height: 200,

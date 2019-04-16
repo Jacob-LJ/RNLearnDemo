@@ -15,8 +15,6 @@ import NativeBtn from './TestDemoPage/12-原生UI/12.1-原生UI基本导出与�
 type Props = {};
 export default class DemoApp extends Component<Props> {
 
-
-
     render() {
 
         const jsonObject = {

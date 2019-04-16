@@ -8,17 +8,18 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TextInput, View, LayoutAnimation, Animated, Easing, Image} from 'react-native';
-import TextInputFieldType from './ATIFEnumType';
+import {StyleSheet, Text, TextInput, View, Animated, Easing, Image} from 'react-native';
 
 export default class AnimateTextInputField extends Component {
 
     static propTypes = {
-        // 对外公开属性
-        inputFieldType: PropTypes.string,           // 输入框类型
+        // 对外公开 属性
         placeHolderText: PropTypes.string,          // 占位文本内容
+        secureTextEntry: PropTypes.bool,            // 是否密文
+        showErrorTip: PropTypes.bool,               // 输入错误时的标识
         leftImageName: PropTypes.string,            // 左 Icon图名称
         rightImageName: PropTypes.string,           // 右 Icon图名称
+
         // 布局属性
         containerH: PropTypes.number,               // 当前控件总容器的默认高度
         textInputContainerH: PropTypes.number,      // textInput控件的默认高度
@@ -33,16 +34,17 @@ export default class AnimateTextInputField extends Component {
     };
 
     static defaultProps = {
-        inputFieldType: TextInputFieldType.Account,
-        leftImageName: 'glasses.png',
-        rightImageName: 'macpro.png',
+        secureTextEntry: false,
+        showErrorTip:false,
+        // leftImageName: 'glasses.png',
+        // rightImageName: 'macpro.png',
 
         containerH: 45,
         textInputContainerH: 30,
 
         duration: 600,
         fontMax: 18,
-        fontMin: 12,
+        fontMin: 14,
         topMax: 18,
         topMin: 2,
         lineMax: 500, // 设置保证底部指示线能够适应最大屏幕宽度
@@ -53,8 +55,10 @@ export default class AnimateTextInputField extends Component {
         super(props);
 
         this.state = {
-            atTop: false,
+            smallerPlaceholder: false,
+            showBtmTipLine: false,
             animatedValue: new Animated.Value(1),
+            btmTipLineAnimatedValue: new Animated.Value(1),
         };
 
         this.changePlaceholderAnimated = Animated.timing(
@@ -65,20 +69,27 @@ export default class AnimateTextInputField extends Component {
                 easing: Easing.linear,
             }
         );
+
+        this.changeBtmTipLineAnimated = Animated.timing(
+            this.state.btmTipLineAnimatedValue,
+            {
+                toValue: 1,
+                duration: this.props.duration,
+                easing: Easing.linear,
+            }
+        );
     }
 
     render() {
         return (
-            <View style={[this.props.style, styles.containerDefaultStyle, {height: this.props.containerH}]}>
+            <View style={[this.props.style, styles.containerDefaultStyle, {height: this.props.containerH, borderBottomColor: this.props.showErrorTip?'red':'#c2c2c2',}]}>
                 {/* 左边图像 */}
                 {this._imageComponent(this.props.leftImageName)}
-
                 {/* 输入框 Container */}
                 <View style={{flex:7}}>
                     <TextInput
                         style={[styles.TextInputStyle, {height: this.props.textInputContainerH, fontSize: this.props.fontMax}]}
-                        // placeholder='手'
-                        secureTextEntry={this.props.inputFieldType === TextInputFieldType.Pwd}
+                        secureTextEntry={this.props.secureTextEntry}
                         clearButtonMode={'while-editing'}
                         onFocus={(event) => {
                             this._startAnimateAction(event.nativeEvent.text, true);
@@ -90,26 +101,32 @@ export default class AnimateTextInputField extends Component {
                     <Animated.Text
                         style={{fontSize: this._getAnimatedValueInterpolate('fontSize'), color: '#c2c2c2', top: this._getAnimatedValueInterpolate('top')}}
                         accessible={false} pointerEvents='none' // 禁止响应事件, 让底层的 TextInput 可以响应事件
-                    >{this._getPlaceHolderTextByInputFieldType()}
+                    >{this.props.placeHolderText}
                     </Animated.Text>
-                    <Animated.View style={{position:'absolute', left:0, bottom:0, height:1, right:this._getAnimatedValueInterpolate('right'), backgroundColor:'red'}}/>
                 </View>
-
                 {/* 右边图像 */}
                 {this._imageComponent(this.props.rightImageName)}
+                {/* 底部动画指示线 */}
+                <Animated.View style={[styles.btmTipLineStyle, {right:this._getAnimatedValueInterpolate('right')}]}/>
             </View>
         );
     }
 
 
     _getAnimatedValueInterpolate(propertyName) {
-        var outputRange;
+        let outputRange;
         if (propertyName === 'fontSize') {
-            outputRange = this.state.atTop ? [this.props.fontMax, this.props.fontMin] : [this.props.fontMin, this.props.fontMax];
+            outputRange = this.state.smallerPlaceholder ? [this.props.fontMax, this.props.fontMin] : [this.props.fontMin, this.props.fontMax];
+
         } else if (propertyName === 'top') {
-            outputRange = this.state.atTop ? [this.props.topMax, this.props.topMin] : [this.props.topMin, this.props.topMax];
+            outputRange = this.state.smallerPlaceholder ? [this.props.topMax, this.props.topMin] : [this.props.topMin, this.props.topMax];
+
         }  else if (propertyName === 'right') {
-            outputRange = this.state.atTop ? [this.props.lineMax, this.props.lineMin] : [this.props.lineMin, this.props.lineMax];
+            outputRange = this.state.showBtmTipLine ? [this.props.lineMax, this.props.lineMin] : [this.props.lineMin, this.props.lineMax];
+            return this.state.btmTipLineAnimatedValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: outputRange,
+            });
         }
 
         return this.state.animatedValue.interpolate({
@@ -118,44 +135,33 @@ export default class AnimateTextInputField extends Component {
         });
     };
 
-    _startAnimateAction(text, atTop) {
+    _startAnimateAction(text, smallerPlaceholder) {
         if (!text.length) {
             this.setState({
-                atTop: atTop,
+                smallerPlaceholder: smallerPlaceholder,
             });
             this.state.animatedValue.setValue(0);
             this.changePlaceholderAnimated.start();
         }
+
+        const showBtmTipLine = this.state.showBtmTipLine;
+        this.setState({
+            showBtmTipLine: !showBtmTipLine,
+        });
+        this.state.btmTipLineAnimatedValue.setValue(0);
+        this.changeBtmTipLineAnimated.start();
     };
 
-    // 编译问题是因为方法体内未涉及实例的使用，编译器推荐将方法改为 static 类型
     _imageComponent(imageName) {
         return  (imageName && imageName.length) ? (<Image style={styles.leftRightImageStyle} source={{uri:imageName}}/>) : null;
     };
-    
-    _getPlaceHolderTextByInputFieldType() {
-        var text = this.props.placeHolderText;
-        if (text && text.length) {
-            return text;
-        } else  {
-            switch (this.props.inputFieldType) {
-                case TextInputFieldType.Account :
-                    text = TextInputFieldType.Account;
-                    break;
-                case TextInputFieldType.Pwd :
-                    text = TextInputFieldType.Pwd;
-                    break;
-            }
-            return text;
-        }
-        
-    }
 }
 
 const styles = StyleSheet.create({
     containerDefaultStyle: {
         flexDirection: 'row',
         // backgroundColor: '#eee8aa',
+        borderBottomWidth: 0.5,
     },
     leftRightImageStyle: {
         flex:1,
@@ -167,8 +173,13 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        borderBottomWidth: 1,
-        borderBottomColor: '#c2c2c2',
         // backgroundColor:'gray',
+    },
+    btmTipLineStyle: {
+        position:'absolute',
+        left:0,
+        bottom:0,
+        height:1,
+        backgroundColor:'red'
     },
 });

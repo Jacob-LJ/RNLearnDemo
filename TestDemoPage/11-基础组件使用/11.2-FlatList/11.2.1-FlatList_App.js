@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
+// FlatList 简单使用
+
 export default class FlatListBasics extends Component {
     render() {
         return (
