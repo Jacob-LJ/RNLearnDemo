@@ -1,8 +1,8 @@
 /**
- *
+ * QSIStudentInfoQueryRecordList_App.js
  * RN_Test
  *
- * Created by PSBC on 2019/4/15.
+ * Created by PSBC on 2019/4/19.
  * Copyright © 2019年 youcash. All rights reserved.
  *
  * @format

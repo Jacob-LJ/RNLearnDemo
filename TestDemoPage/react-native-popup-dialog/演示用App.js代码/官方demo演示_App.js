@@ -1,5 +1,5 @@
 /**
- * react-native-popup-dialog_App.js
+ * 官方demo演示_App.js
  * RN_Test
  *
  * Created by PSBC on 2019/4/17.
