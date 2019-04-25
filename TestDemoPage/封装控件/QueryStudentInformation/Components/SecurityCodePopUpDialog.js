@@ -17,7 +17,7 @@ import Dialog, {
     DialogContent,
     DialogFooter,
     DialogButton,
-} from '../../../react-native-popup-dialog';
+} from '../../../react-native-popup-dialog/index';
 
 export default class SecurityCodePopUpDialog extends Component {
 

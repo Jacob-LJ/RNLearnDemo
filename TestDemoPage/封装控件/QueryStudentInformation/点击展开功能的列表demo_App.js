@@ -183,7 +183,7 @@ export default class QSIStudentInfoQueryRecordList extends Component {
     _renderItem = ({item, index}) => {
         return (
             <View style={{width:'100%', backgroundColor:'gray', padding: this.margin}}>
-                <View style={{flex:1, flexDirection:'row', flexWrap:'wrap', borderColor:'#e5e5e5', borderWidth: 1, borderRadius:10, backgroundColor:'blue'}}>
+                <View style={{flex:1, flexDirection:'row', flexWrap:'wrap', borderColor:'#e5e5e5', borderWidth: 1, borderRadius:10, backgroundColor:'gray'}}>
                     <Text style={this._getItemBlockStyle()}>**弟</Text>
                     <Text style={this._getItemBlockStyle()}>最高学历：博士研究生</Text>
                     <Text style={this._getItemBlockStyle()}>查询时间：2019-05-11</Text>
@@ -221,7 +221,7 @@ export default class QSIStudentInfoQueryRecordList extends Component {
         const borderW = 1;
         const blockH = (this.itemH - this.margin * 2)/2 - borderW;
         const blockW = (screenW - this.margin * 2)/2 - borderW;
-        const itemBlockStyle = {textAlign:'center', height:blockH, width:blockW, borderColor:'green', borderWidth: borderW,};
+        const itemBlockStyle = {textAlign:'center', height:blockH, width:blockW, borderColor:'green', borderWidth: borderW, lineHeight:blockH};
         return itemBlockStyle;
     }
 
