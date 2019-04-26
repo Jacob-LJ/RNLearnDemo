@@ -11,220 +11,201 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {FlatList, StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, FlatList, Dimensions, Image} from 'react-native';
+import AnimateTextInputField from './TestDemoPage/封装控件/QueryStudentInformation/Components/AnimateTextInputField';
+import SecurityCodePopUpDialog from './TestDemoPage/封装控件/QueryStudentInformation/Components/SecurityCodePopUpDialog';
 
-export default class ChatBubble extends Component {
+const {width, height} = Dimensions.get('window');
+
+export default class QSIQueryLogin extends Component {
+
+    static propTypes = {
+        propName: PropTypes.string,
+    };
+
+    static defaultProps = {};
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            didCheckApprove: false,
+            showSecurityCodePopUpDialog: false,
+        };
+    }
 
     render() {
+        const bgCircleW = width*2;
+        const borderRadius = bgCircleW/2;
+        const left =  borderRadius/2;
+        const marginTop = borderRadius*1.355;
         return (
             <View style={styles.defaultStyle}>
+                <View style={{position: 'absolute', width:bgCircleW, height:bgCircleW, left:-left, marginTop:-marginTop,  backgroundColor:'#3093f4', borderRadius:borderRadius}}/>
                 <FlatList
+                    style={{backgroundColor:'transparent'}}
                     data={[
-                        {key: 'Q1'},
-                        {key: 'A1'},
-                        {key: 'Q2'},
-                        {key: 'A2'},
+                        {key: 'inputActItem'},
+                        {key: 'btnActItem'},
+                        {key: 'tipItem'},
                     ]}
                     renderItem={
-                        ({item, index}) => {
-                            let isLeft = index % 2 === 0;
-                            let color = isLeft ? 'white': '#666666';
-                            let style = [styles.textStyle, {color:color}];
-                            if (item.key === 'Q1') {
-                                return this._getItem(isLeft,
-                                    (
-                                        <Text
-                                            style={style}
-                                            numberOfLines={0}
-                                        >
-                                            忘记密码怎么办？
-                                        </Text>
-                                    )
-                                );
-                            } else if (item.key === 'A1') {
-                                return this._getItem(isLeft,
-                                    (
-                                        <Text
-                                            style={style}
-                                            numberOfLines={0}
-                                        >
-                                            如果忘记密码，可通过
-                                            <Text style={{color:'#488ff0'}} onPress={this._findPwdClickAction}>
-                                                {' 找回密码 '}
-                                            </Text>
-                                            来找回学信网密码
-                                        </Text>
-                                    )
-                                );
-                            } else if (item.key === 'Q2') {
-                                return this._getItem(isLeft,
-                                    (
-                                        <Text
-                                            style={style}
-                                            numberOfLines={0}
-                                        >
-                                            没有学信网账号？
-                                        </Text>
-                                    )
-                                );
-                            } else if (item.key === 'A2') {
-                                return this._getItem(isLeft,
-                                    (
-                                        <Text
-                                            style={style}
-                                            numberOfLines={0}
-                                        >
-                                            已有学信网账号的，可直接登录，以避免重复注册为您带来的使用上的不便。没有账号，可以通过
-                                            <Text style={{color:'#488ff0'}} onPress={this._registerClickAction}>
-                                                {' 注册 '}
-                                            </Text>
-                                            来注册学信网账号。账号注册时请务必确保自己填写的手机号等信息准确有效；确保密码输入正确，并同时牢记自己的注册密码。
-                                        </Text>
-                                    )
-                                );
+                        ({item}) => {
+                            if (item.key === 'inputActItem') {
+                                return this._inputActItem();
+                            } else if (item.key === 'btnActItem') {
+                                return this._btnActItem();
+                            } else if (item.key === 'tipItem') {
+                                return this._tipItem();
                             }
                         }
                     }
+                />
+                <SecurityCodePopUpDialog
+                    defaultAnimationDialog={this.state.showSecurityCodePopUpDialog}
+                    dialogStatusChangeFunc={() => {
+                        this.setState({
+                            showSecurityCodePopUpDialog: false,
+                        });
+                    }}
                 />
             </View>
         );
     }
 
-    _getItem(isLeft, content) {
-        return (
-            <QSIFAQSessionBG
-                isLeftDirection={isLeft}
-                content={content}
-            />
-        );
-    }
+    /*
+    *
+    * 渲染行控件区
+    *
+    * */
 
-    // 找回密码 点击
-    _findPwdClickAction() {
-        alert('_findPwdClickAction');
+    _inputActItem() {
+        return (
+            <View style={styles.inputContainerStyle}>
+                <View style={{justifyContent: 'center', alignItems:'center', height:50, backgroundColor:'#ebf4fd', borderTopLeftRadius:15, borderTopRightRadius:15,}}>
+                    <Text style={{fontSize: 18, color: '#4b90f0'}}>请输入学信网用户名、密码查询</Text>
+                </View>
+                <View style={{height:60, alignItems: 'center'}}>
+                    <AnimateTextInputField
+                        style={{width: '85%', position:'absolute', bottom:0}} // backgroundColor: 'cyan'
+                        placeHolderText={'手机号/账号/邮箱'}
+                        // showErrorTip={true}
+                    />
+                </View>
+                <View style={{height:60, alignItems: 'center'}}>
+                    <AnimateTextInputField
+                        style={{width: '85%', position:'absolute', bottom:0}} // backgroundColor: 'gray'
+                        placeHolderText={'请输入密码'}
+                        secureTextEntry={true}
+                    />
+                </View>
+                <View style={{width:'85%', height:76, justifyContent: 'center', alignItems:'center', flexDirection: 'row',}}>
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        onPress={() => {
+                            this.setState((state) => {
+                                return {didCheckApprove: !state.didCheckApprove};
+                            });
+                        }}
+                    >
+                        <Image style={{width: 20, height: 20,}}
+                               source={this.state.didCheckApprove?require('./TestDemoPage/封装控件/QueryStudentInformation/image/qsi_checkBox_yes.png'):require('./TestDemoPage/封装控件/QueryStudentInformation/image/qsi_checkBox_no.png')}
+                        />
+                    </TouchableOpacity>
+                    <Text style={{fontSize:15, left:10, color:'#999999'}}>
+                        已阅读并同意
+                        <Text style={{color: '#4b90f0'}}
+                              onPress={() => {
+                                  alert('查看授权书');
+                              }}
+                        >
+                            个人数据采集授权书
+                        </Text>
+                    </Text>
+                </View>
+            </View>
+        );
+    };
+
+    _btnActItem() {
+        return (
+            <View style={{flex: 1, justifyContent: 'center'}}>
+                <View style={{height: 100, justifyContent: 'center', alignItems:'center'}}>
+                    <TouchableOpacity style={{marginTop: 30, width: '93%', height:44, backgroundColor: '#3093f4', borderRadius: 22}}
+                                      activeOpacity={1}
+                                      onPress={this._queryFreeClickAction.bind(this)}>
+                        <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
+                            <Text style={{color:'white', fontSize:18}}>免费查询</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={{flexDirection: 'row', height: 60, justifyContent: 'center', alignItems:'center'}}>
+                    <Image style={{width: 20, height: 20,}}
+                           source={require('./TestDemoPage/封装控件/QueryStudentInformation/image/qsi_FAQ.png')}
+                    />
+                    <Text style={{color:'#3093f4', fontSize:16, left:10}}
+                          onPress={this._commonQuestionClickAction.bind(this)}
+                    >
+                        常见问题
+                    </Text>
+                </View>
+            </View>
+        );
+    };
+
+    _tipItem() {
+        return (
+            <View style={{flex: 1, height: 160, justifyContent: 'center', alignItems:'center'}}>
+                <View style={{flex: 1, margin: 15, borderRadius: 15, backgroundColor: '#f3f8ff'}}>
+                    <View style={{flexDirection: 'row', marginTop:25}}>
+                        <Image style={{marginLeft:20, width: 17, height: 17}}
+                               source={require('./TestDemoPage/封装控件/QueryStudentInformation/image/qsi_loginTip.png')}
+                        />
+                        <Text style={{color:'#3184bd', fontSize:16, left:10, lineHeight:18}}>温馨提示</Text>
+                    </View>
+                    <Text style={{color:'#666666', fontSize:14, marginTop:20, marginLeft:22, marginRight:22, lineHeight:25}} numberOfLines={20}>
+                        查询范围：2001年以来国家承认的各类已毕业的高等教育学籍信息和学历信息。
+                    </Text>
+                </View>
+            </View>
+        )
+    };
+
+    /*
+    *
+    * 点击按钮时间区
+    *
+    * */
+    // 免费查询 点击
+    _queryFreeClickAction() {
+        // alert('_qureyFreeClickAction');
+        this.setState({
+            showSecurityCodePopUpDialog: true,
+        });
     };
 
     // 常见问题 点击
-    _registerClickAction() {
-        alert('_registerClickAction');
+    _commonQuestionClickAction() {
+        alert('_commonQuestionClickAction');
     }
 }
-
-
-/*
-*
-* 会话背景气泡
-* */
-
-class QSIFAQSessionBG extends Component {
-
-    static propTypes = {
-        isLeftDirection: PropTypes.bool,
-        content: PropTypes.object,
-    };
-
-    static defaultProps = {
-        isLeftDirection: true,  // A、Q区别及箭头的方向
-        content: null,          // 外界传入的文本组件
-    }
-
-    render () {
-        return (
-            this.props.isLeftDirection ? (this._leftBG()) : (this._rightBG())
-        );
-    }
-
-    _leftBG() {
-        return (
-            <View style={{flex:1, flexDirection:'row', alignItems:'center',}}>
-                {/* 圆形 */}
-                <View style={{width:'10%', backgroundColor:'transparent'}}>
-                    <View style={{marginLeft:16, width:28, height:28, borderRadius:14, backgroundColor:'#488ff0', justifyContent:'center', alignItems:'center'}}>
-                        <Text style={{fontSize:18.5, color:'white'}}>Q</Text>
-                    </View>
-                </View>
-
-                {/* 三角形 */}
-                <View style={{width:'5%', backgroundColor:'transparent'}}>
-                    <View style={styles.leftTriangle}/>
-                </View>
-
-                {/* 内容矩形 */}
-                <View style={{width:'85%', marginLeft:-3, flexDirection:'row', alignItems:'center', paddingTop:20, paddingBottom:20, paddingRight:20, backgroundColor:'transparent', }}>
-                    <View style={{borderRadius:5, backgroundColor:'#488ff0', padding:10}}>
-                        {this.props.content}
-                    </View>
-                </View>
-            </View>
-
-        );
-    };
-
-    _rightBG() {
-        return (
-            <View style={{flex:1, flexDirection:'row-reverse', alignItems:'center',}}>
-                {/* 圆形 */}
-                <View style={{width:'10%', backgroundColor:'transparent'}}>
-                    <View style={{marginRight:16, width:28, height:28, borderRadius:14, backgroundColor:'#e3e3e3', justifyContent:'center', alignItems:'center'}}>
-                        <Text style={{fontSize:18.5, color:'#666666'}}>A</Text>
-                    </View>
-                </View>
-
-                {/* 三角形 */}
-                <View style={{width:'5%', backgroundColor:'transparent'}}>
-                    <View style={styles.rightTriangle}/>
-                </View>
-
-                {/* 内容矩形 */}
-                <View style={{width:'85%', marginRight:0, flexDirection:'row-reverse', alignItems:'center', paddingTop:20, paddingBottom:20, paddingRight:20, backgroundColor:'transparent', }}>
-                    <View style={{borderRadius:5, backgroundColor:'#f5f5f5', padding:10}}>
-                        {this.props.content}
-                    </View>
-                </View>
-            </View>
-        );
-    };
-}
-
 
 const styles = StyleSheet.create({
     defaultStyle: {
         flex: 1,
+        overflow:'hidden',
         backgroundColor: 'white',
-        marginTop:100,
-        borderWidth:1,
-        borderColor:'red',
     },
-    textStyle: {
-        flex:1,
-        fontSize:18,
-        lineHeight:25,
+    inputContainerStyle: {
+        marginTop:50,
+        marginLeft:16,
+        marginRight:16,
+        borderRadius:15,
+        height:247,
+        justifyContent: 'center',
+        backgroundColor:'white',
+        shadowColor: 'gray',
+        shadowOffset: { width: -2, height: 1 },
+        shadowOpacity: 0.5,
+        shadowRadius: 6,
     },
-    leftTriangle: {
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderLeftWidth: 9,
-        borderRightWidth: 9,
-        borderBottomWidth: 4,
-        borderTopWidth: 4,
-        borderLeftColor: 'transparent',
-        borderRightColor: '#488ff0',
-        borderTopColor: 'transparent',
-        borderBottomColor: 'transparent',
-    },
-    rightTriangle: {
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderLeftWidth: 9,
-        borderRightWidth: 9,
-        borderBottomWidth: 4,
-        borderTopWidth: 4,
-        borderLeftColor: '#e3e3e3',
-        borderRightColor: 'transparent',
-        borderTopColor: 'transparent',
-        borderBottomColor: 'transparent',
-    },
-
 });
