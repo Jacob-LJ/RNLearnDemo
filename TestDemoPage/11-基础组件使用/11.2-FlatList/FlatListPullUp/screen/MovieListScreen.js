@@ -110,7 +110,7 @@ export default class MovieListScreen extends Component {
         movieList: movieList,
         startPage: startPage
       });
-      that.listView.endRefreshing(footerState);
+        that.listView.endRefreshing(footerState);
     }).catch((e) => {
       console.log("加载失败");
       that.listView.endRefreshing(RefreshState.Failure);

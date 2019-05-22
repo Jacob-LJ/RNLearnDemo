@@ -2,7 +2,7 @@
 //  NativeBtn.m
 //  RN_Test
 //
-//  Created by PSBC on 2019/2/22.
+//  Created by _ on 2019/2/22.
 //  Copyright © 2019 Facebook. All rights reserved.
 //
 
