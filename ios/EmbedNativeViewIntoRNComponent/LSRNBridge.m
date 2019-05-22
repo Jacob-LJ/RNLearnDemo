@@ -37,7 +37,7 @@ RCT_EXPORT_METHOD(addFooterWithRefreshing:(nonnull NSNumber *)reactTag) {
         RCTScrollView *rctScrollV = (RCTScrollView *)viewRegistry[reactTag];
         UIScrollView *scrollV = rctScrollV.scrollView;
         weakSelf.scrollV = scrollV;
-        // 获取已注册的module
+        // 获取已注册的module 或者将这个 LSRNEventEmitterBridge 做场单例，或在init方法内进行共享监听等c
         weakSelf.EventEmitterBridge = [weakSelf.bridge moduleForClass:[LSRNEventEmitterBridge class]];
         scrollV.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:weakSelf.EventEmitterBridge
                                                                  refreshingAction:@selector(fireFooterRefreshBlock)];
