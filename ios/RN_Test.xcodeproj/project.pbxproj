@@ -42,6 +42,7 @@
 		3601A2CD9D9D442186CEE7D7 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DDE819A16544BF2B166CB45 /* libRNGestureHandler.a */; };
 		48054D32221FD18D00E33C05 /* NativeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 48493A00221F841200EA299F /* NativeBtn.m */; };
 		48054D33221FD18D00E33C05 /* NativeBtnManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 48493A03221F844F00EA299F /* NativeBtnManager.m */; };
+		480FCD222294EED3009B52E1 /* SwizzleRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 480FCD212294EED3009B52E1 /* SwizzleRefreshControl.m */; };
 		48490B532294256400F13C5D /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 48490AFD2294256300F13C5D /* UIScrollView+MJRefresh.m */; };
 		48490B542294256400F13C5D /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 48490AFE2294256300F13C5D /* MJRefreshConst.m */; };
 		48490B552294256400F13C5D /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 48490B032294256300F13C5D /* UIScrollView+MJExtension.m */; };
@@ -390,6 +391,8 @@
 		2D02E47B1E0B4A5D006451C7 /* RN_Test-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RN_Test-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* RN_Test-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RN_Test-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		480FCD202294EED3009B52E1 /* SwizzleRefreshControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwizzleRefreshControl.h; sourceTree = "<group>"; };
+		480FCD212294EED3009B52E1 /* SwizzleRefreshControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwizzleRefreshControl.m; sourceTree = "<group>"; };
 		48490AFD2294256300F13C5D /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		48490AFE2294256300F13C5D /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
 		48490AFF2294256300F13C5D /* UIScrollView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJExtension.h"; sourceTree = "<group>"; };
@@ -583,7 +586,7 @@
 		13B07FAE1A68108700A75B9A /* RN_Test */ = {
 			isa = PBXGroup;
 			children = (
-				48490B702294ED2100F13C5D /* New Group */,
+				48490B702294ED2100F13C5D /* SwizzleRCTRefreshControlWithinRCTScrollView */,
 				48490B662294256D00F13C5D /* EmbedNativeViewIntoRNComponent */,
 				1618E22E2221259E008EB90E /* ThirdPart */,
 				48054D0B221FD17500E33C05 /* 导出原生UI */,
@@ -777,11 +780,13 @@
 			path = EmbedNativeViewIntoRNComponent;
 			sourceTree = "<group>";
 		};
-		48490B702294ED2100F13C5D /* New Group */ = {
+		48490B702294ED2100F13C5D /* SwizzleRCTRefreshControlWithinRCTScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				480FCD202294EED3009B52E1 /* SwizzleRefreshControl.h */,
+				480FCD212294EED3009B52E1 /* SwizzleRefreshControl.m */,
 			);
-			path = "New Group";
+			path = SwizzleRCTRefreshControlWithinRCTScrollView;
 			sourceTree = "<group>";
 		};
 		48E8ABF32216A25900F50AF5 /* Recovered References */ = {
@@ -1439,6 +1444,7 @@
 				48490B542294256400F13C5D /* MJRefreshConst.m in Sources */,
 				1618E20622212035008EB90E /* PropertyModel.m in Sources */,
 				1618E23C222127C7008EB90E /* YYClassInfo.m in Sources */,
+				480FCD222294EED3009B52E1 /* SwizzleRefreshControl.m in Sources */,
 				48493A04221F844F00EA299F /* NativeBtnManager.m in Sources */,
 				48490B5E2294256400F13C5D /* MJRefreshNormalHeader.m in Sources */,
 			);

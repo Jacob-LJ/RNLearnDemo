@@ -87,7 +87,7 @@ export default class App extends Component {
                     ListEmptyComponent={this._ListEmptyComponent}
                     ListHeaderComponent={this._ListHeaderComponent}
                     ListFooterComponent={this._ListFooterComponent}
-                    /** refreshHeader */
+                    /** 此处的 refreshHeader 已经被原生代码进行了Swizzle替换，将RCTRefreshControl替换为MJRefresh控件*/
                     refreshing={this.state.isRefreshing}
                     onRefresh={() => {
                         this._refreshData();
