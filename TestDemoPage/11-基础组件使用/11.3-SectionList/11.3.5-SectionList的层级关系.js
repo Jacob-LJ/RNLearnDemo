@@ -1,9 +1,9 @@
 /**
+ * SectionList_Hierarchy.js
+ * _
  *
- * ——
- *
- * Created by —— on 2019/4/15.
- * Copyright © 2019年 ——. All rights reserved.
+ * Created by _ on 2019/5/10.
+ * Copyright © 2019年 _. All rights reserved.
  *
  * @format
  * @flow
