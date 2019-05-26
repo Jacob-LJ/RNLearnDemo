@@ -186,7 +186,21 @@ export default class SectionList_Hierarchy extends Component {
                 >
                     {'header    ' + section.title}
                 </Text>
-                <View style={{position: 'absolute', left: section.key * 30, height: 200, width: 20, backgroundColor: this._randomHexColor()}}/>
+                <View style={{
+                    position: 'absolute',
+                    left: section.key * 30,
+                    bottom: 20,
+                    height: 200,
+                    width: 20,
+                    backgroundColor: this._randomHexColor()
+                }}/>
+                <View style={{
+                    position: 'absolute',
+                    left: section.key * 90,
+                    height: 200,
+                    width: 20,
+                    backgroundColor: this._randomHexColor()
+                }}/>
             </View>
         );
     };
@@ -199,7 +213,13 @@ export default class SectionList_Hierarchy extends Component {
                 >
                     {'footer    ' + section.title}
                 </Text>
-                <View style={{position: 'absolute', left: section.key * 30, height: 200, width: 20, backgroundColor: this._randomHexColor()}}/>
+                <View style={{
+                    position: 'absolute',
+                    left: section.key * 30,
+                    height: 200,
+                    width: 20,
+                    backgroundColor: this._randomHexColor()
+                }}/>
             </View>
         );
     };
