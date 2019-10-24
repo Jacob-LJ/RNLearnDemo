@@ -3,7 +3,7 @@
  * RN_Test
  *
  * Created by PSBC on 2019/4/19.
- * Copyright © 2019年 youcash. All rights reserved.
+ * Copyright © 2019年 xxx. All rights reserved.
  *
  * @format
  * @flow
